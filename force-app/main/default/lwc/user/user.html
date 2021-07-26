@@ -1,0 +1,57 @@
+<template>
+    <div class="row slds-p-around--small slds-card slds-box--small slds-text-align--center">
+        <!-- <ui:outputRichText value={userImage}></ui:outputRichText> -->
+        <!-- <img class="aslds-text-align_centerall" src="https://semantic-ui.com/images/avatar2/small/eve.png"
+            alt="avatar"> -->
+        <span class="slds-avatar slds-avatar--circle">
+            <lightning-formatted-rich-text value={userImage}></lightning-formatted-rich-text>
+        </span>
+        <!-- <div class="avataarImage">
+            <lightning-formatted-rich-text value={userImage}></lightning-formatted-rich-text>
+        </div> -->
+        <h2 class="header slds-text-align--center">{userName}</h2>
+        <small class="slds-text-color_inverse-weak">{userRole}</small>
+        <div class="slds-m-top--small">
+            <lightning-button variant="brand" label="View" title="View Profile" onclick={openProfileModal}
+                class="slds-m-left_x-small slds-m-top--small"></lightning-button>
+        </div>
+    </div>
+    <template if:true={isModalOpen}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+            aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <!-- Modal/Popup Box LWC header here -->
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                        title="Close" onclick={closeProfileModal}>
+                        <lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse"
+                            size="small">
+                        </lightning-icon>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Profile
+                    </h2>
+                </header>
+                <!-- Modal/Popup Box LWC body starts here -->
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                    <div class="slds-grid slds-gutters">
+                        <div class="slds-col slds-size_1-of-3">
+                            <lightning-formatted-rich-text value={userImage}></lightning-formatted-rich-text>
+                        </div>
+                        <div class="slds-col slds-size_2-of-3">
+                            <h2 class="slds-text-heading--large">{userName}</h2>
+                            <small>({userRole})</small>
+                        </div>
+                    </div>
+                </div>
+                <!-- Modal/Popup Box LWC footer starts here -->
+                <footer class="slds-modal__footer">
+                    <button class="slds-button slds-button_neutral" onclick={closeProfileModal}
+                        title="Cancel">Cancel</button>
+                    <!-- <button class="slds-button slds-button_brand" onclick={submitDetails} title="OK">OK</button> -->
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+</template>

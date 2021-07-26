@@ -1,0 +1,23 @@
+<template>
+    <div class="container">
+        <hr class="slds-m-vertical--small">
+        <div class="slds-media">
+            <div class="slds-media__figure">
+                <span class="slds-avatar slds-avatar_large">
+                    <lightning-formatted-rich-text value={comment.user.Avataar__c}></lightning-formatted-rich-text>
+                </span>
+            </div>
+            <div class="slds-media__body">
+                <h2 class="slds-text-heading--small slds-text-title_bold">{comment.user.Name}</h2>
+                <p class="slds-text-color--inverse-weak time">
+                    <lightning-formatted-date-time value={comment.CreatedDate} year="numeric" day="2-digit" month="long"
+                        time-zone="UTC">
+                    </lightning-formatted-date-time>
+                </p>
+                <div class="mediaBodyFooter">
+                    <p>{comment.Name}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

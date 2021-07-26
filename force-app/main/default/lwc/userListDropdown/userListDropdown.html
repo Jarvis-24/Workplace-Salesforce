@@ -1,0 +1,37 @@
+<template>
+    <lightning-combobox class="slds-m-bottom--small" name="users" label="Select User" value={value}
+        placeholder="Select User" options={options} onchange={selectedUser}></lightning-combobox>
+    <template if:true={userId}>
+        <div class="slds-container_fluid">
+            <div class="slds-grid slds-gutters">
+                <div class="slds-col slds-size_1-of-3">
+                    <c-user user-id={userId}></c-user>
+                </div>
+                <div class="slds-col slds-size_2-of-3">
+                    <div class="row slds-p-around--small slds-card slds-box--small">
+                        <h2 class="header">Post</h2>
+                        <hr class="slds-m-vertical--small">
+                        <lightning-textarea name="post" placeholder="Enter your post..." variant="label-hidden">
+                        </lightning-textarea>
+                        <lightning-button variant="brand" label="Post on Feed" title="Post" onclick={post} class="slds-m-top--medium">
+                        </lightning-button>
+                    </div>
+                    <!-- Feed -->
+                    <div class="row slds-p-around--small slds-card slds-box--small">
+                        <h2 class="header">Feed</h2>
+                        <hr class="slds-m-vertical--small">
+                        <div if:true={ifPostsAreAvailable}>
+                            <template for:each={posts} for:item="post">
+                                <c-feed key={post.Id} post={post} user-id={userId}></c-feed>
+                            </template>
+                        </div>
+                        <div if:false={ifPostsAreAvailable}>
+                            <p class="noPost slds-text-align--center slds-text-color_inverse-weak slds-text-heading--medium">
+                                No Post To Display</p>
+                        </div>
+                    </div>               
+                    </div>
+                </div>
+            </div>
+        </template>
+</template>

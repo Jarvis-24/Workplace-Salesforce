@@ -1,0 +1,53 @@
+<template>
+    <div class="row slds-p-around--small slds-card slds-box--small slds-m-bottom--small">
+        <div class="slds-media">
+            <div class="slds-media__figure">
+                <span class="slds-avatar slds-avatar_large">
+                        <lightning-formatted-rich-text value={post.user.Avataar__c}></lightning-formatted-rich-text>
+                </span>
+            </div>
+            <div class="slds-media__body">
+                <h2 class="slds-text-heading--label slds-text-title_bold">{post.user.Name}</h2>
+                <p class="slds-text-color--inverse-weak">
+                    <lightning-formatted-date-time value={post.CreatedDate} year="numeric" day="2-digit" month="long"
+                        time-zone="UTC">
+                    </lightning-formatted-date-time>
+                </p>
+            </div>
+        </div>
+        <hr class="slds-m-vertical--small">
+        <div class="post">{post.Name}</div>
+        <hr class="slds-m-vertical--small">
+        <c-like post={post} user-id={userId}></c-like>
+        <lightning-button class="slds-float--right" value={post.Id} variant="brand" label="Comment" title="Comment"
+            onclick={handleCommentToggle}>
+        </lightning-button>
+        <div if:true={showComment}>
+            <hr class="slds-m-vertical--small">
+            <div class="slds-media">
+                <div class="slds-media__figure">
+                    <span class="slds-avatar slds-avatar_large">
+                        <lightning-formatted-rich-text value={currentUserImage}></lightning-formatted-rich-text>
+                    </span>
+                </div>
+                <div class="slds-media__body">
+                    <lightning-layout>
+                        <lightning-layout-item>
+                            <lightning-input class="slds-size_x-large" type="text" label="Write Comment.." variant="label-hidden"
+                                placeholder="Write Comment.."></lightning-input>
+                        </lightning-layout-item>
+                        <lightning-layout-item>
+                            <lightning-button variant="brand" label="Comment" title="Comment" value={post.Id} onclick={comment}
+                                class="slds-m-left--small"></lightning-button>
+                        </lightning-layout-item>
+                    </lightning-layout>
+                </div>
+            </div>
+            <template for:each={comments} for:item="comment">
+                <c-comment key={comment.Id} comment={comment}>
+                </c-comment>
+            </template>
+
+        </div>
+    </div>
+</template>
